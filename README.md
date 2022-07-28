@@ -1,149 +1,131 @@
 # Baskhara Service
 
-## Descrição do Problema
+O **professor de matemática Estevão** veio até a nós pelo nosso canal de contato com o cliente em busca de uma **solução de software**
+para uma **visão** de negócio que teve com seus vários anos de experiência de sala de aula. Nos apresentou sua visão e uma proposta
+de que podemos ser seus sócios neste empreendimento. Solicitamos uma reunião em nosso escritório e ele compareceu.
 
-Um professor de matemática deseja fornecer para escolas públicas um software
-lúdico para ensinar alunos a entenderem equações do segundo grau, com isso
-realizando o cálculo de raízes para entenderem como funciona a fórmula de Baskhara.
+Apaixonado pelo conhecimento e pela experimentação dos conceitos matemáticos para a vida real, Estevão nos explicou um problema típico
+para alunos do Ensino Fundamental e Médio: a resolução de equações do segundo grau. Ele queria, com isso, mostrar como um aplicativo
+poderia servir aos alunos como um meio lúdico e simples de se exercitar polinômios e achar raízes de uma dada função do segundo grau.
 
-Na conversa com o professor, ele pediu para criarmos um MVP que permita o cálculo
-da equação utilizando bhaskara e uma maneira simples, podendo ser por linha de comando,
-para interagir com a solução.
+Ele aposta que o software tem a capacidade de fornecer um passo-a-passo da execução de um algoritmo muito usado para encontrar raízes
+reais, sendo a popular "Fórmula de Bhaskara". Esta fórmula fornece procedimentos e estes podemos enxergar como um algoritmo.
 
-> Chamamos de MVP versão 1. SEM APIs!!!
+## Análise Computacional e Matemática da Fórmula de Bhaskara
 
-Num futuro momento, ele desejou criarmos uma interface gráfica podendo ser um app.
-Mas isso vai ficar para renovação do contrato de prestação de serviço.
+Com a nossa experiência, conversamos de que uma solução algorítmica **existe**, porque o algoritmo de bhaskara é computável, isto é, tem tempo finito
+e dá respostas corretas. Concluímos, após a análise computacional, ser **possível implementar tal solução**.
 
-> Chamamos de MVP versão 2. Somente iremos expor APIs AQUI!
+> Obs.: Dependendo do tipo de solução, por vezes buscamos profissionais capacitados em diferentes áreas do conhecimento.
 
-## Proposta de Solução
-
-Queremos fornecer uma forma automatizada de se calcular raízes de 
-equações do segundo grau. Podemos lembrar como é a função do segundo grau na sua
-**forma original**.
+Definimos com o professor a **Função do Segundo Grau**, que chamamos de forma original 
 
 ```
-y = ax^2 + bx + c
-ou
 f(x) = ax^2 + bx + c
 ```
 
-Analisamos que existe um grande interesse em se obter os zeros da equação.
-Os zeros de equação ocorrem quando queremos obter os valores possíveis
-das variáveis para y = 0. A equação na forma de busca do zero fica sendo
+Com **a, b** e **c** pertencente aos **números reais**. Por sua vez, **Encontrar raízes** é o ato de definir
 
 ```
-y = ax^2 + bx + c = 0
-ax^2 + bx + c = 0
+f(x) = ax^2 + bx + c = 0
 ```
 
-### Análise do Caso A
-
-Definimos a função `f(x) = x^2 −2x - 3`. Analisando-se o gráfico da função
-plotada. As respectivas raízes são `x1 = -1` e `x2 = 3`.
-
-<center>
-    <img width="50%" src="./docs/plot_caso_a.png" />
-</center>
-
-É útil definirmos este caso para conhecer um exemplo de função
-que gera raízes com valores em números reais.
-
-## Parecer técnico
-
-O cliente (sendo professor de matemática) sugeriu uso de interfaces gráficas no
-futuro para melhorar a acessibilidade da solução. Nós, aqui da equipe de TI,
-identificamos que independente da interface gráfica, precisamos de criar
-um serviço de backend (isto é, não tem interface gráfica) para nos dar a possibilidade
-de gerar inteligência unificada entre os demais dispositivos que fornecerão
-a interface de aplicativo.
-
-Podemos para o cliente que essa decisão consiste em separar o frontend
-do backend para podermos reaproveitar o código e assim tornar o desenvolvimento
-menos custoso.
-
-## Análise de Requisitos
-
-Na fase de análise de requisitos, temos que levantar as features e suas
-respectivas histórias de usuário. Vale lembrar que features são recursos ou
-funcionalidades a serem colocadas no produto. Precisamos informar cliente
-no contrato e chegar a um acordo sobre as features desejadas.
-
-### Feature F001 : Dar suporte ao Cálculo de Raízes de Equação do Segundo Grau por Linha de Comando
-
-> Vamos agora refinar os requisitos.
-
-#### Mapeamento de User Story
-
-**INTRODUÇÃO DE HISTÓRIA**.
-
-Precisamos pensar no que consiste o cálculo de raízes. O cálculo consiste
-em formular entradas dos valores que acompanham os termos da expressão matemática.
-Vamos definir quais valores acompanham dada a expressão a seguir.
-
-* `ax^2 + bx + c`. É um polinômio com 3 termos. Cada termo podemos utilizar a seguinte
-nomenclatura: para `ax^2` chamamos de termo A, `bx` de termo B e `c` de termo C.
-
-Para os termos A, B e C, temos que definir as constantes numéricas `a`, `b` e `c`
-como sendo pertencentes ao conjunto dos números reais. Discutimos um caso
-em que quando `a` é zero, acabamos descrevendo uma expressão que é uma função de
-primeiro grau a partir da forma original da equação do segundo grau e também
-se considerarmos que estamos utilizando a fórmula de Bhaskara, ela se torna conveniente
-se tivermos uma equação do segundo grau com `a` diferente de zero.
-
-> Agora começamos a restringir os valores possíveis como entrada de dados.
-
-Recapitulando, temos agora que a feature demanda uma maneira de fornecer
-dados de entrada para definir os valores das constantes `a`, `b` e `c`.
-
-##### CENÁRIO 1
-
-> Podemos utilizar a linguagem do BDD para descrever o cenário.
+Para achar as raízes, ou seja, os valores de 'x' que satisfaça `f(x) = 0` ou `y = 0`, definimos o Algoritmo de Bhaskara
 
 ```
-Scenario: dadas constantes a, b e c validas calcule as raizes.
+delta = b^2 - 4*a*c
 
-    Given Os parametros de entrada a, b e c como sendo valores do tipo texto
-    When Os parametros a, b e c forem validos, isto e, sendo numeros reais
-    Then Deve retornar as raizes da equacao
+Conjunto de Raizes (popularmente x1 e x2) = (-b +- sqrt(delta)) / 2*a
 ```
 
-##### CENÁRIO 2
+### Caso de `a = 0`
+
+O prof. Estevão nos avisou desta situação. Com `a = 0`, 
 
 ```
-Scenario: dadas constantes ou 'a' ou 'b' ou 'c' invalidas, indique "Por favor, insira somente numeros reais" 
-
-    Given Os parametros de entrada a, b e c como sendo valores do tipo texto
-    When Alguns dos parametros forem invalidos, isto e, for inserido caracteres invalidos
-    Then Deve lançar o erro 'Por favor, insira somente numeros reais'
+Conjunto de Raizes = (-b +- sqrt(delta)) / 2*0
+faz com que Conjunto de Raizes = Não Exista em Números Reais. Logo, podemos já impedir o prosseguimento do algoritmo muito antes
+de executá-lo, somente testando 'a' sendo diferente de 0. Ele disse que é suficiente indicar "Por favor, Bhaskara só funciona com 'a' diferente de zero."
 ```
 
-##### CENÁRIO 3
+As constantes **b** e **c** pode assumir quaisquer valores reais. Concluímos que
 
-```
-Scenario: dada constante 'a' sendo zero, indique "Nao existem raizes reais".
-Como observacao, nao calcule as raizes.
+* **a** : não pode ser zero e deve ser um valor real
+* **b** : pode ser qualquer valor real
+* **c** : pode ser qualquer valor real
 
-    Given Os parametros de entrada a, b e c como sendo valores do tipo texto
-    When O parametro 'a' for zero mas b e c forem numeros reais
-    Then Lance o erro 'Nao existem raizes reais'
-```
+## Goals
 
-### Feature F002 : BhaskaraApp - Seu app de calculo de equacao do segundo grau
+O prof. Estevão nos disse que a solução de software pode trazer benefícios às escolas públicas.
+Ele nos explicou que andou conversando com o secretário de educação municipal e que poderia
+utilizar algumas escolas como *early adopters* (adotantes iniciais).
 
-#### Mapeamento de User Story
+Confiamos nele devido sua experiência profissional e como educador. Acreditamos que alcançaremos
+juntos os objetivos de negócio:
+
+* **OBJ1**: Facilitar aos alunos e aos professores de matemática a montagem de equação do segundo grau com
+diferentes valores de entrada, o que facilita ao professor explicar detalhes matemáticos;
+
+* **OBJ2**: Fazer os alunos notarem como os procedimentos de encontrar raízes pode ser fácil de executar
+seguindo exemplos variados;
+
+* **OBJ3**: Explicar aos alunos as propriedades matemáticas da função. 
+
+## Capabilities
+
+Após intensas reuniões, Estevão expressou quais capacidades a solução de software pode oferecer.
+
+* **CAP001** - Fazer o cálculo de raízes de uma função do segundo grau: esperamos alcançar **OBJ1**;
+* **CAP002** - Mostrar um passo-a-passo da execução da Fórmula de Bhaskara: esperamos alcançar **OBJ2**;
+* **CAP003** - Gerar um documento que detalhe as propriedades matemáticas da função: esperamos alcançar **OBJ3**.
+
+Concordamos e verificamos serem todos possíveis de se fazer com a tecnologia atual.
+
+## Features (Inicia-se a fase 'Análise de Requisitos')
+
+Chegada a hora de informar ao Estevão quais features devemos colocar num contrato de prestação de serviço.
+Foi acordado que primeiramente iremos prestar o serviço a um custo reduzido e, com o sucesso do produto,
+podemos receber dividendos como sócios, algo que também foi definido no contrato.
+
+Temos que lembrar que cada capability gera features. Uma feature detalha como iremos alcançar a capability
+utilizando alguma tecnologia de software real. A análise de requisitos consiste em levantar os requisitos,
+ou seja, as features.
+
+Geralmente negociamos quais features entram no contrato e como vai ser o chamado **Road map**. Um Road map
+é um mapa de entregas a serem feitas após cada ciclo de desenvolvimento. Assim faremos somente o que foi
+acordado em contrato, estabelecemos um prazo de término da prestação do serviço e período de suporte técnico.
+
+> Nesta etapa, o prof. Estevão, nossos analistas de negócio e nós desenvolvedores estaremos participando das reuniões.
+
+### Milestones (marcos de entrega)
+
+Adotamos como marco de entrega a publicação de pacotes com todos os binários do software compilado.
+Para facilitar referências contratuais como "Até Dezembro entregaremos a versão v1.0", adotaremos o [SEMVER](https://semver.org/)
+como sistema de versionamento de software.
+
+### Feature F001: Dar suporte ao Cálculo de Raízes de Equação do Segundo Grau por Linha de Comando 
+
+* Capability atendida: **CAP001**
+
+* Observação: o professor disse que aceita nesta etapa do projeto que a interação com a solução ocorra somente por
+linha de comando. Ele possui experiência com terminal de comandos.
+
+* Descrição: ...
 
 ...
 
-### Feature F003 : MathReport - um analisador matemático que gera relatório da Equação do Segundo Grau
+### Feature F002: MathReport - um analisador matemático que gera um arquivo descrevendo o passo-a-passo do encontro de raízes e as propriedades da Equação do Segundo Grau 
 
-#### Mapeamento de User Story
+* Capability atendida: **CAP002**
+* Descrição: ...
 
 ...
 
-### Feature F004 : Historico de Expressoes Matematicas
+### Feature F003 : Histórico de Expressões Matemáticas
 
-#### Mapeamento de User Story
+* Capabilites atendidas: **CAP002** e **CAP003**
+* Descrição: Estevão deseja buscar numa base de dados as operações já realizadas filtrando-se pelas constantes 'a', 'b' e 'c' já inseridas anteriormente.
+Ele disse que se filtrarmos por 'a', temos que obter o histórico de funções com a constante 'a' naquele determinado valor buscado. O mesmo processo
+ocorrerá para as demais constantes. Deve ser possível o registro do histórico ser aceito como entrada de dados para a **F002**, assim atendemos **CAP003**.
 
 ...
