@@ -145,3 +145,10 @@ ocorrerá para as demais constantes. Deve ser possível o registro do histórico
 * Observação: definimos que esta feature é um requisito **X**
 
 ...
+
+### Feature F006: BhaskaraApp - um app como facilitador da educação
+
+* Capabilities atendidas: **???**
+* Descrição: ...
+* Observação: definimos que esta feature é um requisito **X**
+
