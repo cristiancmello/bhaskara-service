@@ -78,6 +78,7 @@ Após intensas reuniões, Estevão expressou quais capacidades a solução de so
 * **CAP001** - Fazer o cálculo de raízes de uma função do segundo grau: esperamos alcançar **OBJ1**;
 * **CAP002** - Mostrar um passo-a-passo da execução da Fórmula de Bhaskara: esperamos alcançar **OBJ2**;
 * **CAP003** - Gerar um documento que detalhe as propriedades matemáticas da função: esperamos alcançar **OBJ3**.
+* **???** - ??? : esperamos alcançar **???**
 
 Concordamos e verificamos serem todos possíveis de se fazer com a tecnologia atual.
 
@@ -114,18 +115,33 @@ linha de comando. Ele possui experiência com terminal de comandos.
 
 ...
 
-### Feature F002: MathReport - um analisador matemático que gera um arquivo descrevendo o passo-a-passo do encontro de raízes e as propriedades da Equação do Segundo Grau 
+### Feature F002: Uma API RESTful para facilitar uso por outros softwares
+
+* Capability atendida: **???**
+* Observação: definimos que esta feature é um requisito **X**
+
+...
+
+### Feature F003: MathReport - um analisador matemático que gera um arquivo descrevendo o passo-a-passo do encontro de raízes e as propriedades da Equação do Segundo Grau 
 
 * Capability atendida: **CAP002**
 * Descrição: ...
 
 ...
 
-### Feature F003 : Histórico de Expressões Matemáticas
+### Feature F004: Histórico de Expressões Matemáticas
 
 * Capabilites atendidas: **CAP002** e **CAP003**
 * Descrição: Estevão deseja buscar numa base de dados as operações já realizadas filtrando-se pelas constantes 'a', 'b' e 'c' já inseridas anteriormente.
 Ele disse que se filtrarmos por 'a', temos que obter o histórico de funções com a constante 'a' naquele determinado valor buscado. O mesmo processo
-ocorrerá para as demais constantes. Deve ser possível o registro do histórico ser aceito como entrada de dados para a **F002**, assim atendemos **CAP003**.
+ocorrerá para as demais constantes. Deve ser possível o registro do histórico ser aceito como entrada de dados para a **F003**, assim atendemos **CAP003**.
+
+...
+
+### Feature F005: Implantação da Solução de Software na AWS
+
+* Capabilities atendidas: **???**
+* Descrição: ...
+* Observação: definimos que esta feature é um requisito **X**
 
 ...
