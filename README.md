@@ -152,3 +152,5 @@ ocorrerá para as demais constantes. Deve ser possível o registro do histórico
 * Descrição: ...
 * Observação: definimos que esta feature é um requisito **X**
 
+> Nos parece que alguma feature tem ligação com a F006. Qual seria?
+> Existe alguma maneira técnica de se fazer F006 sem ter que esperar por alguém fazer outra feature?
