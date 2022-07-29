@@ -64,7 +64,7 @@ Confiamos nele devido sua experiência profissional e como educador. Acreditamos
 juntos os objetivos de negócio:
 
 * **OBJ1**: Facilitar aos alunos e aos professores de matemática a montagem de equação do segundo grau com
-diferentes valores de entrada, o que facilita ao professor explicar detalhes matemáticos;
+diferentes valores de entrada, o que permite ao professor explicar detalhes matemáticos;
 
 * **OBJ2**: Fazer os alunos notarem como os procedimentos de encontrar raízes pode ser fácil de executar
 seguindo exemplos variados;
