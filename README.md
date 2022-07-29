@@ -154,3 +154,16 @@ ocorrerá para as demais constantes. Deve ser possível o registro do histórico
 
 > Nos parece que alguma feature tem ligação com a F006. Qual seria?
 > Existe alguma maneira técnica de se fazer F006 sem ter que esperar por alguém fazer outra feature?
+
+...
+
+## Gerenciamento de Projeto
+
+Nosso gerente de projeto vai acompanhar o desenvolvimento e aplicar as metodologias Agile e o processo Scrum, onde temos a Scrum Daily Meeting por enquanto.
+Ele observa que podemos ponderar a possibilidade de executar as features em paralelo.
+
+As features irão compor o **Product Backlog** e as ??? irão compor a **Sprint Backlog**.
+
+### Plano de Execução das Features
+
+...
