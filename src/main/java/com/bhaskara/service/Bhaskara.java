@@ -16,4 +16,23 @@ public class Bhaskara {
 
         return conjuntoRaizes;
     }
+
+    public static String verificaoInvalid(String valueA, String valueB, String valueC){
+
+        int v = 0;
+
+        try {
+            double a =Double.parseDouble(valueA);
+            double b = Double.parseDouble(valueB);
+            double c = Double.parseDouble(valueC);
+            v = 0;
+
+        } catch (NumberFormatException exception){
+            v = 1;
+        }
+
+        String verificacao = Integer.toString(v);
+        return verificacao;
+    }
 }
+

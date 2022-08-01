@@ -22,4 +22,19 @@ class BhaskaraTests {
 		// colocar uma asserção devido a palavra 'deve'
 		assertThat(Bhaskara.calcularRaizes(a, b, c)).contains(-1.0, 3.0);
 	}
+
+	@Test
+	void given_ParametrosTextoInválidos_thenThorwsNumberFormatException(){
+
+		String valueA = "g";
+		String valueB = "2";
+		String valueC = "-3";
+
+		String verificacao = Bhaskara.verificaoInvalid(valueA, valueB, valueC);
+		int esperado = Integer.parseInt(verificacao);
+		int equal = 1;
+
+		assertThat(esperado).isEqualTo(equal);
+
+	}
 }
