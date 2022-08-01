@@ -71,8 +71,6 @@ seguindo exemplos variados;
 
 * **OBJ3**: Explicar aos alunos as propriedades matemáticas da função. 
 
-* **OBJ4**: Universalizar o acesso à solução.
-
 ## Capabilities
 
 Após intensas reuniões, Estevão expressou quais capacidades a solução de software pode oferecer.
@@ -80,7 +78,6 @@ Após intensas reuniões, Estevão expressou quais capacidades a solução de so
 * **CAP001** - Fazer o cálculo de raízes de uma função do segundo grau: esperamos alcançar **OBJ1**;
 * **CAP002** - Mostrar um passo-a-passo da execução da Fórmula de Bhaskara: esperamos alcançar **OBJ2**;
 * **CAP003** - Gerar um documento que detalhe as propriedades matemáticas da função: esperamos alcançar **OBJ3**.
-* **CAP004** - Integração da solução com outros softwares do mercado : esperamos alcançar **OBJ4**
 * **???** - ??? : esperamos alcançar **???**
 
 Concordamos e verificamos serem todos possíveis de se fazer com a tecnologia atual.
@@ -116,54 +113,19 @@ linha de comando. Ele possui experiência com terminal de comandos.
 
 * Descrição: ...
 
-#### História de Usuário
-
-A história de usuário é um detalhamento da feature. Uma feature pode ter várias histórias.
-Lembrando-se que, se uma história é muito grande, pode ser que seja necessário criar uma nova feature.
-Uma história pode ser quebrada em Exemplos. Nos exemplos já podemos utilizar o modelo de descrição do
-BDD, porque tratamos do comportamento das ações que o sistema precisa ter.
-
-Os exemplos podem produzir o chamado "Efeito de Precedência". Quando ocorre isso? Quando um exemplo
-tem efeito de consequência para o exemplo seguinte.
-
-* EXEMPLO 1
-
-```gherkin
-Scenario: dadas constantes a, b e c validas calcule as raizes.
-    Given Os parametros de entrada a, b e c como sendo valores do tipo texto
-    When Os parametros convertidos a partir da entrada a, b e c forem validos, isto e, sendo numeros reais
-    Then A função de calcular raizes deve retornar as raizes da equacao
-```
-
-* EXEMPLO 2
-
-```gherkin
-Scenario: dadas constantes ou 'a' ou 'b' ou 'c' invalidas, indique "Por favor, insira somente numeros reais"
-    Given Os parametros de entrada a, b e c como sendo valores do tipo texto
-    When Alguns dos parametros forem invalidos, isto e, for inserido caracteres invalidos
-    Then O cálculo de raízes deve lançar o erro 'Por favor, insira somente numeros reais'
-```
-
-* EXEMPLO 3
-
-```gherkin
-Scenario: dada constante 'a' sendo zero, indique "Nao existem raizes reais". Como observacao, nao calcule as raizes.
-
-    Given Os parametros de entrada a, b e c como sendo valores do tipo texto
-    When O parametro 'a' for zero mas b e c forem numeros reais
-    Then Lance o erro 'Nao existem raizes reais'
-```
+...
 
 ### Feature F002: Uma API RESTful para facilitar uso por outros softwares
 
-* Capability atendida: **CAP004**
-* Observação: definimos que esta feature é um requisito **funcional**.
+* Capability atendida: **???**
+* Observação: definimos que esta feature é um requisito **X**
+
+...
 
 ### Feature F003: MathReport - um analisador matemático que gera um arquivo descrevendo o passo-a-passo do encontro de raízes e as propriedades da Equação do Segundo Grau 
 
 * Capability atendida: **CAP002**
-* Definimos que esta feature é um requisito **funcional**.
-* Descrição: 
+* Descrição: ...
 
 ...
 
@@ -173,30 +135,26 @@ Scenario: dada constante 'a' sendo zero, indique "Nao existem raizes reais". Com
 * Descrição: Estevão deseja buscar numa base de dados as operações já realizadas filtrando-se pelas constantes 'a', 'b' e 'c' já inseridas anteriormente.
 Ele disse que se filtrarmos por 'a', temos que obter o histórico de funções com a constante 'a' naquele determinado valor buscado. O mesmo processo
 ocorrerá para as demais constantes. Deve ser possível o registro do histórico ser aceito como entrada de dados para a **F003**, assim atendemos **CAP003**.
-* Definimos que esta feature é um requisito **funcional**.
+
 ...
 
 ### Feature F005: Implantação da Solução de Software na AWS
 
-* Capabilities atendidas: **CAP004**
+* Capabilities atendidas: **???**
 * Descrição: ...
-* Observação: definimos que esta feature é um requisito **funcional**
+* Observação: definimos que esta feature é um requisito **X**
 
 ...
 
 ### Feature F006: BhaskaraApp - um app como facilitador da educação
 
-* Capabilities atendidas: **CAP001**, **CAP002** e **CAP003**
+* Capabilities atendidas: **???**
 * Descrição: ...
-* Observação: definimos que esta feature é um requisito **funcional**
+* Observação: definimos que esta feature é um requisito **X**
 
 > Nos parece que alguma feature tem ligação com a F006. Qual seria?
-A feature que mais se conecta com a F006 é a F002. Existem outras que também se relacionaria.
-Mas, no modelo Agile, precisamos garantir entregas menores e mais independentes possíveis.
-Logo, quando a F002 for desenvolvida, a equipe precisa indicar a interface de Mock que o App
-vai utilizar.
 > Existe alguma maneira técnica de se fazer F006 sem ter que esperar por alguém fazer outra feature?
-Existe sim, utilizando Mocks e Stubs.
+
 ...
 
 ## Gerenciamento de Projeto
@@ -204,10 +162,8 @@ Existe sim, utilizando Mocks e Stubs.
 Nosso gerente de projeto vai acompanhar o desenvolvimento e aplicar as metodologias Agile e o processo Scrum, onde temos a Scrum Daily Meeting por enquanto.
 Ele observa que podemos ponderar a possibilidade de executar as features em paralelo.
 
-As features irão compor o **Product Backlog** e as **Histórias de Usuário** irão compor a **Sprint Backlog**.
+As features irão compor o **Product Backlog** e as ??? irão compor a **Sprint Backlog**.
 
 ### Plano de Execução das Features
 
 ...
-
-
