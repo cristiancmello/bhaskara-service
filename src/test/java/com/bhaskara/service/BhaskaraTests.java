@@ -2,6 +2,8 @@ package com.bhaskara.service;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Scanner;
+
 import static org.assertj.core.api.Assertions.*;
 
 // TDD
@@ -33,11 +35,39 @@ class BhaskaraTests {
 	}
 
 	@Test
-	void given_ParametrosTextoInválidos_thenThorwsNumberFormatException(){
+	void given_ParametrosTextoInválidos_then_Throw_NumberFormatException_valueA(){
 
-		String valueA = "G";
-		String valueB = "2";
-		String valueC = "-3";
+		String valueA = "g";
+		String valueB = "6";
+		String valueC = "2";
+
+		assertThatThrownBy(() -> {
+			Bhaskara.setCoeficientes(valueA, valueB, valueC);
+		}).isInstanceOf(NumberFormatException.class)
+				.hasMessage("Por favor insira numeros reais!");
+
+	}
+
+	@Test
+	void given_ParametrosTextoInválidos_then_Throw_NumberFormatException_valueB(){
+
+		String valueA = "1";
+		String valueB = "g";
+		String valueC = "2";
+
+		assertThatThrownBy(() -> {
+			Bhaskara.setCoeficientes(valueA, valueB, valueC);
+		}).isInstanceOf(NumberFormatException.class)
+				.hasMessage("Por favor insira numeros reais!");
+
+	}
+
+	@Test
+	void given_ParametrosTextoInválidos_then_Throw_NumberFormatException_valueC(){
+
+		String valueA = "1";
+		String valueB = "6";
+		String valueC = "g";
 
 		assertThatThrownBy(() -> {
 			Bhaskara.setCoeficientes(valueA, valueB, valueC);
