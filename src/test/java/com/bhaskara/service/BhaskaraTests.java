@@ -22,4 +22,17 @@ class BhaskaraTests {
 		// colocar uma asserção devido a palavra 'deve'
 		assertThat(Bhaskara.calcularRaizes(a, b, c)).contains(-1.0, 3.0);
 	}
+
+	@Test
+	void given_ParametrosTexto_when_ParametroAIgualZero_then_LancarExcecao() {
+		String inputA = "0", inputB = "-2", inputC = "-3";
+
+		double a = Double.parseDouble(inputA);
+		double b = Double.parseDouble(inputB);
+		double c = Double.parseDouble(inputC);
+
+		assertThatThrownBy(() -> Bhaskara.calcularRaizes(a, b, c))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Nao existem raizes reais");
+	}
 }
