@@ -2,8 +2,6 @@ package com.bhaskara.service;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
 import static org.assertj.core.api.Assertions.*;
 
 // TDD
