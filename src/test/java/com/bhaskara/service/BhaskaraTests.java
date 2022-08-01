@@ -31,4 +31,18 @@ class BhaskaraTests {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Nao existem raizes reais");
 	}
+
+	@Test
+	void given_ParametrosTextoInválidos_thenThorwsNumberFormatException(){
+
+		String valueA = "G";
+		String valueB = "2";
+		String valueC = "-3";
+
+		assertThatThrownBy(() -> {
+			Bhaskara.setCoeficientes(valueA, valueB, valueC);
+		}).isInstanceOf(NumberFormatException.class)
+				.hasMessage("Por favor insira numeros reais!");
+
+	}
 }

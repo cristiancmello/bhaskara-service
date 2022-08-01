@@ -27,9 +27,14 @@ public class Bhaskara {
     }
 
     public static void setCoeficientes(String inputA, String inputB, String inputC) {
-        a = Double.parseDouble(inputA);
-        b = Double.parseDouble(inputB);
-        c = Double.parseDouble(inputC);
+
+        try{
+            a = Double.parseDouble(inputA);
+            b = Double.parseDouble(inputB);
+            c = Double.parseDouble(inputC);
+        }catch (NumberFormatException exception){
+            throw new NumberFormatException("Por favor insira numeros reais!");
+        }
 
     }
 }
