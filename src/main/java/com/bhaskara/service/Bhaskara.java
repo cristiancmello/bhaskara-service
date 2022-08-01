@@ -3,6 +3,9 @@ package com.bhaskara.service;
 import java.util.ArrayList;
 
 public class Bhaskara {
+    static Double a;
+    static Double b;
+    static Double c;
 
     public static ArrayList<Double> calcularRaizes(double a, double b, double c) {
         if (a == 0) throw new IllegalArgumentException("Nao existem raizes reais");
@@ -17,5 +20,16 @@ public class Bhaskara {
         conjuntoRaizes.add(x2);
 
         return conjuntoRaizes;
+    }
+
+    public static ArrayList<Double> calcularRaizes() {
+        return calcularRaizes(a, b, c);
+    }
+
+    public static void setCoeficientes(String inputA, String inputB, String inputC) {
+        a = Double.parseDouble(inputA);
+        b = Double.parseDouble(inputB);
+        c = Double.parseDouble(inputC);
+
     }
 }
