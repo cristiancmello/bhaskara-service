@@ -33,15 +33,14 @@ class BhaskaraTests {
 	}
 
 	@Test
-	void given_ParametrosTextoInválidos_thenThorwsNumberFormatException(){
+	void given_ParametrosTextoInvalidos_thenThrowsNumberFormatException(){
 
 		String valueA = "G";
 		String valueB = "2";
 		String valueC = "-3";
 
-		assertThatThrownBy(() -> {
-			Bhaskara.setCoeficientes(valueA, valueB, valueC);
-		}).isInstanceOf(NumberFormatException.class)
+		assertThatThrownBy(() -> Bhaskara.setCoeficientes(valueA, valueB, valueC))
+				.isInstanceOf(NumberFormatException.class)
 				.hasMessage("Por favor insira numeros reais!");
 
 	}
