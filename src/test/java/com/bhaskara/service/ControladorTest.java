@@ -9,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 class ControladorTest {
     private final ByteArrayOutputStream saida = new ByteArrayOutputStream();
@@ -47,6 +46,28 @@ class ControladorTest {
         Controlador.main(new String[0]);
 
         assertThat(saida.toString()).contains("3.0", "-1.0");
+    }
+
+    @Test
+    void given_ComandoCalcBhaskara_when_ComandoExecutado_and_ParametroInvalido_then_ExibirErro() {
+        String comando = "calcbhaskara";
+        String inputA = "g", inputB = "-2", inputC = "-3";
+        setEntrada(comando, inputA, inputB, inputC);
+
+        Controlador.main(new String[0]);
+
+        assertThat(erro.toString()).contains("Por favor insira numeros reais!");
+    }
+
+    @Test
+    void given_ComandoCalcBhaskara_when_ComandoExecutado_and_ParametroAIgualZero_then_ExibirErro() {
+        String comando = "calcbhaskara";
+        String inputA = "0", inputB = "-2", inputC = "-3";
+        setEntrada(comando, inputA, inputB, inputC);
+
+        Controlador.main(new String[0]);
+
+        assertThat(erro.toString()).contains("Nao existem raizes reais");
     }
 
     @Test
