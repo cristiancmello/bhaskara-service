@@ -1,5 +1,21 @@
 # Baskhara Service
 
+## Testes
+
+### Teste tudo exceto Infra
+
+```sh
+mvn test
+```
+
+### Teste Infra Somente
+
+```sh
+mvn -Dtest=BhaskaraOpsTests test
+```
+
+## Narrativa de Negócio
+
 O **professor de matemática Estevão** veio até a nós pelo nosso canal de contato com o cliente em busca de uma **solução de software**
 para uma **visão** de negócio que teve com seus vários anos de experiência de sala de aula. Nos apresentou sua visão e uma proposta
 de que podemos ser seus sócios neste empreendimento. Solicitamos uma reunião em nosso escritório e ele compareceu.
