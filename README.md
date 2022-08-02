@@ -190,13 +190,12 @@ comando para calcular as raizes usando Bhaskara.
 * EXEMPLO 1:
 
 ```gherkin
-Scenario: dados os coeficientes a, b e c seria gerado um grafico junto com para que assim se possa
-entender a equacao.
+Scenario: dados os coeficientes a, b e c seria gerado um grafico para que assim se possa
+visualizar a equacao.
 
-  Given os coeficientes a, b e c
-  When as raizes forem calculadas
-  And o comando 'graph' for executado 
-  Then um grafico é gerado e salvo num documento PDF
+  Given os coeficientes a, b e c e conjunto de raizes
+  When eu chamo o metodo para gerar o grafico da equacao 
+  Then um grafico é gerado como uma imagem PNG e inserido em um documento PDF
 ```
 
 * EXEMPLO 2:
