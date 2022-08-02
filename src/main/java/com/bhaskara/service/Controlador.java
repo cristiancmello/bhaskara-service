@@ -6,8 +6,9 @@ import java.util.Scanner;
 public class Controlador {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("O que deseja executar? >> ");
-        String comando = scanner.next();
+        String comando = scanner.nextLine();
 
         switch (comando) {
             case "calcbhaskara":
@@ -16,17 +17,15 @@ public class Controlador {
             default:
                 System.err.println("Comando desconhecido");
         }
-
-        scanner.close();
     }
 
     private static void calcBhaskara(Scanner scanner) {
         System.out.print("Por favor, insira o valor de A >> ");
-        String inputA = scanner.next();
+        String inputA = scanner.nextLine();
         System.out.print("Por favor, insira o valor de B >> ");
-        String inputB = scanner.next();
+        String inputB = scanner.nextLine();
         System.out.print("Por favor, insira o valor de C >> ");
-        String inputC = scanner.next();
+        String inputC = scanner.nextLine();
         scanner.close();
 
         try
