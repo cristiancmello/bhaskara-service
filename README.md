@@ -154,18 +154,75 @@ Scenario: dada constante 'a' sendo zero, indique "Nao existem raizes reais". Com
     Then Lance o erro 'Nao existem raizes reais'
 ```
 
+* EXEMPLO 4
+
+```gherkin
+Scenario: dada um programa que faz a leitura via linha de comando do tipo REPL, digita-se
+comando para calcular as raizes usando Bhaskara.
+
+  Given o comando 'calcbhaskara'
+  When o comando for executado
+  And passar os coeficientes a, b e c via prompt "Insira por favor o coeficiente 'x'"
+  And confirmar
+  Then Calcule as raizes
+  And Imprima os valores das saidas
+```
+
+* EXEMPLO 5
+
+```gherkin
+# TODO Exemplo de Historia com o tratamento de erros de digitacao de comandos
+```
+
 ### Feature F002: Uma API RESTful para facilitar uso por outros softwares
 
 * Capability atendida: **CAP004**
 * Observação: definimos que esta feature é um requisito **funcional**.
 
-### Feature F003: MathReport - um analisador matemático que gera um arquivo descrevendo o passo-a-passo do encontro de raízes e as propriedades da Equação do Segundo Grau 
+### Feature F003: MathReport - um analisador matemático que gera um arquivo descrevendo o passo-a-passo do encontro de raízes e as propriedades da Equação do Segundo Grau + Grafico 
 
 * Capability atendida: **CAP002**
 * Definimos que esta feature é um requisito **funcional**.
 * Descrição: 
 
-...
+#### Histórias de Usuário
+
+* EXEMPLO 1:
+
+```gherkin
+Scenario: dados os coeficientes a, b e c seria gerado um grafico junto com para que assim se possa
+entender a equacao.
+
+  Given os coeficientes a, b e c
+  When as raizes forem calculadas
+  And o comando 'graph' for executado 
+  Then um grafico é gerado e salvo num documento PDF
+```
+
+* EXEMPLO 2:
+
+```gherkin
+Scenario: dados os coeficientes a, b e c deseja-se a exibicao das propriedades da equacao.
+Propriedade 1: Retornar os valores a, b e c
+Propriedade 2: Valor do discriminante (delta) - delta > 0, delta = 0, delta < 0
+Propriedade 3: Valores das raizes 
+Propriedade 4: Coordenadas do Vértice (xv, yv)
+
+  Given os coeficientes a, b e c
+  When for solicitado a impressao do relatorio das propriedades usando o comando 'mathreport'
+  Then um relatorio é gerado via documento (PDF)
+```
+
+* EXEMPLO 3:
+
+```gherkin
+Scenario: dados os coeficientes a, b e c deseja-se um relatorio que contenha o grafico da equacao
+e relatorio das propriedades.
+
+  Given os coeficientes a, b e c
+  When o comando 'graph.mathreport' ou 'mathreport.graph'
+  Then imprima o documento com ou grafico e as propriedades para 'graph.mathreport' ou com as propriedades e o grafico para 'mathreport.graph'
+```
 
 ### Feature F004: Histórico de Expressões Matemáticas
 
@@ -182,7 +239,29 @@ ocorrerá para as demais constantes. Deve ser possível o registro do histórico
 * Descrição: ...
 * Observação: definimos que esta feature é um requisito **funcional**
 
-...
+#### Histórias de Usuário (DevOps)
+
+* EXEMPLO 1
+
+```gherkin
+Scenario: dada uma aplicacao em Java 11 com uso do Maven, desejamos criar um container Docker
+que empacote numa imagem o servidor web na porta 8080 iniciando a aplicacao em Spring Boot.
+
+  Given aplicacao Java com Maven
+  When for solicitado um `docker build -t bhaskara-service/bhaskara-back`
+  Then gere a imagem da aplicacao e publique no AWS ECR
+```
+
+* EXEMPLO 2
+
+```gherkin
+Scenario: dada a imagem do Docker da aplicacao no ECR, publique uma Stack contendo
+a aplicacao de ECS Fargate subindo o nosso servidor web na porta 8080.
+
+  Given dada a imagem no ECR e uma especificacao no Cloudformation contendo Cluster ECS Fargate
+  When for acionado a implantacao
+  Then aplicacao é implantada e publicada globalmente na ECS Fargate
+```
 
 ### Feature F006: BhaskaraApp - um app como facilitador da educação
 
