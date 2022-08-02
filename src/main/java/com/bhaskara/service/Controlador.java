@@ -17,20 +17,22 @@ public class Controlador {
             default:
                 System.err.println("Comando desconhecido");
         }
+
+        scanner.close();
     }
 
     private static void calcBhaskara(Scanner scanner) {
-        System.out.print("Por favor, insira o valor de A >> ");
-        String inputA = scanner.nextLine();
-        System.out.print("Por favor, insira o valor de B >> ");
-        String inputB = scanner.nextLine();
-        System.out.print("Por favor, insira o valor de C >> ");
-        String inputC = scanner.nextLine();
-        scanner.close();
+        final String[] COEFICIENTES = {"A", "B", "C"};
+        String[] valores = new String[3];
+
+        for(int i = 0; i < 3; i++) {
+            System.out.print("Por favor, insira o valor de " + COEFICIENTES[i] + " >> ");
+            valores[i] = scanner.nextLine();
+        }
 
         try
         {
-            Bhaskara.setCoeficientes(inputA, inputB, inputC);
+            Bhaskara.setCoeficientes(valores[0], valores[1], valores[2]);
             ArrayList<Double> raizes = Bhaskara.calcularRaizes();
 
             String retorno = "X1: " + raizes.get(0) + " | X2: " + raizes.get(1);

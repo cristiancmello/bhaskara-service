@@ -9,21 +9,25 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 class ControladorTest {
-    private ByteArrayOutputStream saida;
-    private ByteArrayOutputStream erro;
+    private final ByteArrayOutputStream saida = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream erro = new ByteArrayOutputStream();
 
     @BeforeEach
     void setSaida() {
-        saida = new ByteArrayOutputStream();
         System.setOut(new PrintStream(saida));
-        erro = new ByteArrayOutputStream();
         System.setErr(new PrintStream(erro));
     }
 
-    void setEntrada(String inputString) {
-        var entrada = new ByteArrayInputStream(inputString.getBytes());
+    void setEntrada(String comando, String ...argumentos) {
+        StringBuilder inputString = new StringBuilder(comando);
+        for (String argumento : argumentos) {
+            inputString.append("\n").append(argumento);
+        }
+
+        var entrada = new ByteArrayInputStream(inputString.toString().getBytes());
         System.setIn(entrada);
     }
 
@@ -37,12 +41,8 @@ class ControladorTest {
     @Test
     void given_ComandoCalcBhaskara_when_ComandoExecutado_then_CalcularRaizes() {
         String comando = "calcbhaskara";
-        String inputA = "1";
-        String inputB = "-2";
-        String inputC = "-3";
-
-        String inputString = comando + "\n" + inputA + "\n" + inputB + "\n" + inputC;
-        setEntrada(inputString);
+        String inputA = "1", inputB = "-2", inputC = "-3";
+        setEntrada(comando, inputA, inputB, inputC);
 
         Controlador.main(new String[0]);
 
@@ -51,8 +51,8 @@ class ControladorTest {
 
     @Test
     void given_ComandoDesconhecido_when_ComandoExecutado_then_ExibirComandoDesconhecido() {
-        String inputString = "comandodesconhecido";
-        setEntrada(inputString);
+        String comando = "comandodesconhecido";
+        setEntrada(comando);
 
         Controlador.main(new String[0]);
 
