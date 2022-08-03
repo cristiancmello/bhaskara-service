@@ -50,12 +50,6 @@ public class PlotGraph {
         plt.executeSilently();
 
 
-
-
-
-
-
-
     }
 
 }

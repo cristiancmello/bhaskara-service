@@ -195,7 +195,7 @@ visualizar a equacao.
 
   Given os coeficientes a, b e c e conjunto de raizes
   When eu chamo o metodo para gerar o grafico da equacao 
-  Then um grafico é gerado como uma imagem PNG e inserido em um documento PDF
+  Then um grafico é gerado como uma imagem PNG.
 ```
 
 * EXEMPLO 2:
