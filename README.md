@@ -10,8 +10,26 @@ mvn test
 
 ### Teste Infra Somente
 
+* Lembre-se de dar um Check em **Expose daemon on tcp://localhost:2375 without TLS**.
+
 ```sh
-mvn -Dtest=BhaskaraOpsTests test
+mvn test -Dtest=BhaskaraOpsTests \
+    -Dapi.version=1.41 \
+    -Dregistry.url=https://index.docker.io/v1/ \
+    -Dregistry.username=${DOCKER_USERNAME} \
+    -Dregistry.password=${DOCKER_PASSWORD} \
+    -Dregistry.email=${DOCKER_REGISTRY_EMAIL}
+```
+
+* Exemplo
+
+```sh
+mvn test -Dtest=BhaskaraOpsTests \
+    -Dapi.version=1.41 \
+    -Dregistry.url=https://index.docker.io/v1/ \
+    -Dregistry.username=johndoe \
+    -Dregistry.password=123... \
+    -Dregistry.email=john.doe@gmail.com
 ```
 
 ## Narrativa de Negócio
