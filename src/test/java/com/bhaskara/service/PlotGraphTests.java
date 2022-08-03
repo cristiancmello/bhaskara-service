@@ -31,6 +31,8 @@ public class PlotGraphTests {
 
 
 
+
+
         //TODO: verificar se o md5 é igual ao modelo gerado.
         //calcule o md5 modelo do arquivo grafico.pdf (pesquisar no java o metodo de calcular md5 a partir de um arquivo)
         //calcule o md5 do grafico gerado pelo plotGraph

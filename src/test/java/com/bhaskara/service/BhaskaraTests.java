@@ -1,6 +1,12 @@
 package com.bhaskara.service;
 
+import com.testautomationguru.utility.CompareMode;
+import com.testautomationguru.utility.PDFUtil;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -43,5 +49,21 @@ class BhaskaraTests {
 				.isInstanceOf(NumberFormatException.class)
 				.hasMessage("Por favor insira numeros reais!");
 
+	}
+
+	@Test
+	void given_Parametros_Then_create_PDF() throws IOException {
+
+		Map<String, String> valores = new HashMap<>();
+
+		valores.put("Valor A", "1");
+		valores.put("Valor B", "-2");
+		valores.put("Valor C", "-3");
+
+		BhaskaraReport.createPDF(valores);
+		PDFUtil pdfUtil = new PDFUtil();
+		pdfUtil.setCompareMode(CompareMode.VISUAL_MODE);
+
+		assertThat(pdfUtil.compare("bhaskaraDescription.pdf" , "compareDescription.pdf")).isTrue();
 	}
 }
