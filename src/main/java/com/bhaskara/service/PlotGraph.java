@@ -46,10 +46,8 @@ public class PlotGraph {
                 .add(rootX1, axisY)
                 .add(rootX2, axisY);
 
-        plt.savefig("quadratic_polynomial.png");
+        plt.savefig("grafico.png");
         plt.executeSilently();
     }
-
-
 
 }

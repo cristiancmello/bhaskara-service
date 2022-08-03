@@ -15,8 +15,9 @@ public class PlotGraphTests {
 
         PlotGraph plotGraph = new PlotGraph();
         plotGraph.criarGrafico(a,b,c);
-        //plotGraph.inserirGraficoEmPDF();
 
+
+        //plotGraph.inserirGraficoEmPDF();
 
 
 
