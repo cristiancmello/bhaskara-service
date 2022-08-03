@@ -264,8 +264,9 @@ Scenario: dada uma aplicacao em Java 11 com uso do Maven, desejamos criar um con
 que empacote numa imagem o servidor web na porta 8080 iniciando a aplicacao em Spring Boot.
 
   Given aplicacao Java com Maven
-  When for solicitado um `docker build -t bhaskara-service/bhaskara-back`
-  Then gere a imagem da aplicacao e publique no AWS ECR
+  And um Dockerfile que empacota o servidor web na porta 8080
+  When for solicitado um `docker build -t bhaskara-service/bhaskara-back .`
+  Then gere a imagem da aplicacao com a tag 'bhaskara-service/bhaskara-back' e publique no AWS ECR
 ```
 
 * EXEMPLO 2
