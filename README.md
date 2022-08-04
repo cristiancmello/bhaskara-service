@@ -285,6 +285,16 @@ a aplicacao de ECS Fargate subindo o nosso servidor web na porta 8080.
   Then aplicacao é implantada e publicada globalmente na ECS Fargate
 ```
 
+* EXEMPLO 3
+
+```gherkin
+Scenario: suporte ao comando `mvn deploy` ou algo parecido
+
+  Given Dockerfile e um registro com repositorio no ECR ja criado
+  When for solicitado o comando de deploy
+  Then gere a imagem da aplicacao com alguma tag e publique no AWS ECR
+```
+
 ### Feature F006: BhaskaraApp - um app como facilitador da educação
 
 * Capabilities atendidas: **CAP001**, **CAP002** e **CAP003**

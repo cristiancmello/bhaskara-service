@@ -95,6 +95,7 @@ public class BhaskaraOpsTests {
 
         dockerClient.tagImageCmd(imageName, repository.getRepositoryUri(), tagName).exec();
 
+        // Then publish image in Registry
         dockerClient
                 .pushImageCmd(repository.getRepositoryUri())
                 .withTag(tagName)
