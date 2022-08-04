@@ -3,7 +3,6 @@ package com.bhaskara.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 public class Bhaskara {
     static Double a;
     static Double b;
