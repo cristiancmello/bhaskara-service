@@ -1,5 +1,8 @@
 package com.bhaskara.service;
 
+import com.github.sh0nk.matplotlib4j.PythonExecutionException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +47,7 @@ public class Bhaskara {
         }
     }
 
-    public static Map<String, String> takePropriedades(){
+    public static Map<String, String> takePropriedades() throws PythonExecutionException, IOException {
 
         Map<String, String> conteudo = new HashMap<>();
 
@@ -54,6 +57,8 @@ public class Bhaskara {
         conteudo.put("Valor Delta", String.valueOf(delta));
         conteudo.put("Valor X1", String.valueOf(x1));
         conteudo.put("Valor X2", String.valueOf(x2));
+
+        PlotGraph.criarGrafico(a, b, c);
 
         return conteudo;
     }

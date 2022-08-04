@@ -1,5 +1,6 @@
 package com.bhaskara.service;
 
+import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -7,12 +8,10 @@ import com.lowagie.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 public class BhaskaraReport {
-    public static String createPDF(Map<String, String> valores) {
+    public static String createPDF(Map<String, String> valores) throws PythonExecutionException, IOException {
 
         Bhaskara.setCoeficientes(valores.get("Valor A"), valores.get("Valor B"), valores.get("Valor C"));
 
@@ -32,16 +31,19 @@ public class BhaskaraReport {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream("bhaskaraDescription.pdf"));
 
-            Font fontChunk = FontFactory.getFont(FontFactory.HELVETICA, 16);
+            Font fontChunk = FontFactory.getFont(FontFactory.HELVETICA, 16); //Padrao fonte
 
+            //Titulo do PDF
             Paragraph titulo = new Paragraph("Calculo de bhaskara");
             titulo.setFont(fontChunk);
             titulo.setAlignment(Element.ALIGN_CENTER);
 
+            //Texto do PDF
             Paragraph subTitulo = new Paragraph("Aqui está o resultado da sua equação de Bhaskara");
             subTitulo.setFont(fontChunk);
             subTitulo.setAlignment(Element.ALIGN_CENTER);
 
+            //Tabela do PDF
             PdfPTable tabela = new PdfPTable(2);
             tabela.addCell("Valor A");
             tabela.addCell(conteudo.get("Valor A"));
@@ -56,6 +58,7 @@ public class BhaskaraReport {
             tabela.addCell("Valor X2");
             tabela.addCell(conteudo.get("Valor X2"));
 
+            //Imagem do gráfico
             Image grafico = Image.getInstance("grafico.png");
             grafico.setAlignment(Element.ALIGN_CENTER);
 
@@ -67,11 +70,9 @@ public class BhaskaraReport {
             document.add(grafico);
             document.close();
 
-            MessageDigest implementMd5 = MessageDigest.getInstance("MD5");
-
         } catch (FileNotFoundException | DocumentException e) {
             e.printStackTrace();
-        } catch (NoSuchAlgorithmException | IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 

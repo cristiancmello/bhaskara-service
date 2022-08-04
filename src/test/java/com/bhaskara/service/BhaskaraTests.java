@@ -1,5 +1,6 @@
 package com.bhaskara.service;
 
+import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 import com.testautomationguru.utility.CompareMode;
 import com.testautomationguru.utility.PDFUtil;
 import org.junit.jupiter.api.Test;
@@ -52,7 +53,7 @@ class BhaskaraTests {
 	}
 
 	@Test
-	void given_Parametros_Then_create_PDF() throws IOException {
+	void given_Parametros_Then_create_PDF() throws IOException, PythonExecutionException {
 
 		Map<String, String> valores = new HashMap<>();
 

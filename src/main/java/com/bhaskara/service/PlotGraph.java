@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlotGraph {
 
-    public void criarGrafico(double a, double b, double c) throws PythonExecutionException, IOException {
+    public static void criarGrafico(double a, double b, double c) throws PythonExecutionException, IOException {
         // f(x) = x^2 −2x - 3   (coef: 1, -2, -3)
         // x1 = -1, x2 = 3
         List<Double> axisX = NumpyUtils.linspace(-1 + (-5), 3 + (5), 100);
@@ -48,13 +48,6 @@ public class PlotGraph {
 
         plt.savefig("grafico.png");
         plt.executeSilently();
-
-
-
-
-
-
-
 
     }
 
