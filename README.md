@@ -15,7 +15,7 @@ mvn test
 * Necessário permissões de Pushing Image e Auth no AWS ECR
 * Lembre-se de criar o repositório `bhaskara-service` no ECR Registry
 
-* Ações do teste: construção da imagem do **Docker Container** e publicação na **AWS ECR**
+* Ações do teste: construção da imagem do **Docker Container** e publicação na **AWS ECR**, verificando se cada etapa ocorreu como o esperado.
 
 ```sh
 mvn test -Dtest=BhaskaraOpsTests
