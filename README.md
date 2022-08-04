@@ -11,25 +11,12 @@ mvn test
 ### Teste Infra Somente
 
 * Lembre-se de dar um Check em **Expose daemon on tcp://localhost:2375 without TLS**.
+* Necessário estar autenticado com **AWS CLI v2**
+* Necessário permissões de Pushing Image e Auth no AWS ECR
+* Lembre-se de criar o repositório `bhaskara-service` no ECR Registry
 
 ```sh
-mvn test -Dtest=BhaskaraOpsTests \
-    -Dapi.version=1.41 \
-    -Dregistry.url=https://index.docker.io/v1/ \
-    -Dregistry.username=${DOCKER_USERNAME} \
-    -Dregistry.password=${DOCKER_PASSWORD} \
-    -Dregistry.email=${DOCKER_REGISTRY_EMAIL}
-```
-
-* Exemplo
-
-```sh
-mvn test -Dtest=BhaskaraOpsTests \
-    -Dapi.version=1.41 \
-    -Dregistry.url=https://index.docker.io/v1/ \
-    -Dregistry.username=johndoe \
-    -Dregistry.password=123... \
-    -Dregistry.email=john.doe@gmail.com
+mvn test -Dtest=BhaskaraOpsTests
 ```
 
 ## Narrativa de Negócio
