@@ -3,6 +3,7 @@ package com.bhaskara.service;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,6 +12,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.ecr.AmazonECR;
 import com.amazonaws.services.ecr.AmazonECRClientBuilder;
 import com.amazonaws.services.ecr.model.*;
+import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.DockerClientImpl;
@@ -55,52 +57,9 @@ public class BhaskaraOpsTests {
 
     @Test
     void givenDockerImage_whenDeploy_thenPublishImageAwsEcrRegistry() throws InterruptedException {
-        AmazonECR amazonECR = AmazonECRClientBuilder.standard()
-                .withRegion(Regions.US_EAST_1)
-                .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
-                .build();
-
-        DescribeRepositoriesRequest describeRepositoriesRequest = new DescribeRepositoriesRequest();
-        describeRepositoriesRequest.setRepositoryNames(List.of(repositoryName));
-
-        DescribeRepositoriesResult describeRepositoriesResult = amazonECR.describeRepositories(describeRepositoriesRequest);
-        var repositories = describeRepositoriesResult.getRepositories();
-        var repository = repositories.get(0);
-
-        GetAuthorizationTokenResult authorizationToken = amazonECR
-                .getAuthorizationToken(new GetAuthorizationTokenRequest().withRegistryIds(repository.getRegistryId()));
-
-        List<AuthorizationData> authorizationData = authorizationToken.getAuthorizationData();
-        String encodedToken = authorizationData.get(0).getAuthorizationToken();
-
-        String userPassword = StringUtils.newStringUtf8(Base64.decodeBase64(encodedToken));
-        String username = userPassword.substring(0, userPassword.indexOf(":"));
-        String password = userPassword.substring(userPassword.indexOf(":") + 1);
-
-        DockerClientConfig standard = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                .withRegistryUrl(authorizationData.get(0).getProxyEndpoint())
-                .withRegistryUsername(username)
-                .withRegistryPassword(password)
-                .build();
-
-        DockerHttpClient httpClient = new ApacheDockerHttpClient.Builder()
-                .dockerHost(standard.getDockerHost())
-                .sslConfig(standard.getSSLConfig())
-                .maxConnections(100)
-                .connectionTimeout(Duration.ofSeconds(30))
-                .responseTimeout(Duration.ofSeconds(45))
-                .build();
-
-        var dockerClient = DockerClientImpl.getInstance(standard, httpClient);
-
-        dockerClient.tagImageCmd(imageName, repository.getRepositoryUri(), tagName).exec();
-
-        // Then publish image in Registry
-        dockerClient
-                .pushImageCmd(repository.getRepositoryUri())
-                .withTag(tagName)
-                .exec(new PushImageResultCallback())
-                .awaitCompletion();
+        AmazonECR amazonECR = ConfigAWSECRRepository.initializeAmazonECRClient();
+        Repository repository = ConfigAWSECRRepository.getECRRepository(amazonECR, repositoryName);
+        DockerClient dockerClient = ConfigAWSECRRepository.initializeDockerClient(amazonECR, repository);
 
         var describeImagesRequest = new DescribeImagesRequest();
         var filter = new DescribeImagesFilter();
@@ -112,6 +71,8 @@ public class BhaskaraOpsTests {
         describeImagesRequest.setRepositoryName(repositoryName);
         describeImagesRequest.setFilter(filter);
         describeImagesRequest.setImageIds(List.of(imageIdentifier));
+
+        ConfigAWSECRRepository.createRepository(dockerClient, repository, imageName, tagName);
 
         var imageDetail = amazonECR.describeImages(describeImagesRequest).getImageDetails().get(0);
         var imageSizeInBytesFromEcr = imageDetail.getImageSizeInBytes();
