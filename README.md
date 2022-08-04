@@ -1,5 +1,33 @@
 # Baskhara Service
 
+## Testes
+
+### Teste tudo exceto Infra
+
+```sh
+mvn test
+```
+
+### Teste Infra Somente (DevOps)
+
+* Lembre-se de dar um Check em **Expose daemon on tcp://localhost:2375 without TLS**.
+* Necessário estar autenticado com **AWS CLI v2**
+* Necessário permissões de Pushing Image e Auth no AWS ECR
+* Lembre-se de criar o repositório `bhaskara-service` no ECR Registry
+
+* Ações do teste: construção da imagem do **Docker Container** e publicação na **AWS ECR**, verificando se cada etapa ocorreu como o esperado.
+
+```sh
+mvn test -Dtest=BhaskaraOpsTests
+```
+
+> Qual benefício eu tenho com testes de Infra? Ao mesmo tempo posso testar as configurações
+e a etapa de deploy. Assim garanto que a infra entregue cumpre a feature e requisitos mais rigorosos de segurança.
+Podemos, por exemplo, escanear portas TCP antes mesmo de fazer deploy da aplicação, evitando ataques internos
+por exposição de portas sem devido acompanhamento. Isso nos traz possibilidade de automatizar inspeções técnicas complexas após deployment.
+
+## Narrativa de Negócio
+
 O **professor de matemática Estevão** veio até a nós pelo nosso canal de contato com o cliente em busca de uma **solução de software**
 para uma **visão** de negócio que teve com seus vários anos de experiência de sala de aula. Nos apresentou sua visão e uma proposta
 de que podemos ser seus sócios neste empreendimento. Solicitamos uma reunião em nosso escritório e ele compareceu.
@@ -252,8 +280,9 @@ Scenario: dada uma aplicacao em Java 11 com uso do Maven, desejamos criar um con
 que empacote numa imagem o servidor web na porta 8080 iniciando a aplicacao em Spring Boot.
 
   Given aplicacao Java com Maven
-  When for solicitado um `docker build -t bhaskara-service/bhaskara-back`
-  Then gere a imagem da aplicacao e publique no AWS ECR
+  And um Dockerfile que empacota o servidor web na porta 8080
+  When for solicitado um `docker build -t bhaskara-service/bhaskara-back .`
+  Then gere a imagem da aplicacao com a tag 'bhaskara-service/bhaskara-back' e publique no AWS ECR
 ```
 
 * EXEMPLO 2
@@ -265,6 +294,16 @@ a aplicacao de ECS Fargate subindo o nosso servidor web na porta 8080.
   Given dada a imagem no ECR e uma especificacao no Cloudformation contendo Cluster ECS Fargate
   When for acionado a implantacao
   Then aplicacao é implantada e publicada globalmente na ECS Fargate
+```
+
+* EXEMPLO 3
+
+```gherkin
+Scenario: suporte ao comando `mvn deploy` ou algo parecido
+
+  Given Dockerfile e um registro com repositorio no ECR ja criado
+  When for solicitado o comando de deploy
+  Then gere a imagem da aplicacao com alguma tag e publique no AWS ECR
 ```
 
 ### Feature F006: BhaskaraApp - um app como facilitador da educação
