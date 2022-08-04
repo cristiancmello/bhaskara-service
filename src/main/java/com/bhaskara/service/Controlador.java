@@ -19,6 +19,9 @@ public class Controlador {
             case "mathreport":
                 mathreport(scanner);
                 break;
+            case "graph":
+                graph(scanner);
+                break;
             default:
                 System.err.println("Comando desconhecido");
         }
@@ -61,6 +64,26 @@ public class Controlador {
         try
         {
             BhaskaraReport.createPDF(valores);
+        }
+        catch (Throwable throwable)
+        {
+            System.err.println(throwable.getMessage());
+        }
+    }
+
+    private static void graph(Scanner scanner) {
+        final String[] COEFICIENTES = {"A", "B", "C"};
+        double[] valores = new double[3];
+
+        for(int i = 0; i < 3; i++) {
+            System.out.print("Por favor, insira o valor de " + COEFICIENTES[i] + " >> ");
+            valores[i] = Double.parseDouble(scanner.nextLine());
+        }
+
+        try
+        {
+            PlotGraph plotGraph = new PlotGraph();
+            plotGraph.criarGrafico(valores[0], valores[1], valores[2]);
         }
         catch (Throwable throwable)
         {

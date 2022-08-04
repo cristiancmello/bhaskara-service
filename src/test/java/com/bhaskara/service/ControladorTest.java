@@ -1,11 +1,16 @@
 package com.bhaskara.service;
 
+import com.github.romankh3.image.comparison.ImageComparison;
+import com.github.romankh3.image.comparison.ImageComparisonUtil;
+import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import com.github.romankh3.image.comparison.model.ImageComparisonState;
 import com.testautomationguru.utility.CompareMode;
 import com.testautomationguru.utility.PDFUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -85,6 +90,22 @@ class ControladorTest {
         pdfUtil.setCompareMode(CompareMode.VISUAL_MODE);
 
         assertThat(pdfUtil.compare("bhaskaraDescription.pdf" , "compareDescription.pdf")).isTrue();
+    }
+
+    @Test
+    void given_ComandoGraph_when_ComandoExecutado_then_CriarGraficoPNG() throws IOException {
+        String comando = "graph";
+        String inputA = "1", inputB = "-2", inputC = "-3";
+        setEntrada(comando, inputA, inputB, inputC);
+
+        Controlador.main(new String[0]);
+
+        BufferedImage graficoEsperado = ImageComparisonUtil.readImageFromResources("graficoEsperado.png");
+        BufferedImage grafico = ImageComparisonUtil.readImageFromResources("grafico.png");
+
+        ImageComparisonResult resultadoComparacao = new ImageComparison(graficoEsperado, grafico).compareImages();
+
+        assertThat(ImageComparisonState.MATCH).isEqualTo(resultadoComparacao.getImageComparisonState());
     }
 
     @Test

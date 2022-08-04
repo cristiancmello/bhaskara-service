@@ -1,5 +1,6 @@
 package com.bhaskara.service;
 
+import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -12,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 public class BhaskaraReport {
-    public static String createPDF(Map<String, String> valores) {
+    public static void createPDF(Map<String, String> valores) {
 
         Bhaskara.setCoeficientes(valores.get("Valor A"), valores.get("Valor B"), valores.get("Valor C"));
 
@@ -20,15 +21,13 @@ public class BhaskaraReport {
 
         Map<String, String> conteudoDoPDF = Bhaskara.takePropriedades();
 
-        String MD5 = BhaskaraReport.createConteudoPDF(conteudoDoPDF);
+        BhaskaraReport.createConteudoPDF(conteudoDoPDF);
 
-        return MD5;
     }
 
-    public static String createConteudoPDF(Map <String, String> conteudo){
+    public static void createConteudoPDF(Map <String, String> conteudo){
 
         try {
-
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream("bhaskaraDescription.pdf"));
 
@@ -56,6 +55,12 @@ public class BhaskaraReport {
             tabela.addCell("Valor X2");
             tabela.addCell(conteudo.get("Valor X2"));
 
+            double a = Double.parseDouble(conteudo.get("Valor A"));
+            double b = Double.parseDouble(conteudo.get("Valor B"));
+            double c = Double.parseDouble(conteudo.get("Valor C"));
+            PlotGraph plotGraph = new PlotGraph();
+            plotGraph.criarGrafico(a, b, c);
+
             Image grafico = Image.getInstance("grafico.png");
             grafico.setAlignment(Element.ALIGN_CENTER);
 
@@ -71,10 +76,9 @@ public class BhaskaraReport {
 
         } catch (FileNotFoundException | DocumentException e) {
             e.printStackTrace();
-        } catch (NoSuchAlgorithmException | IOException e) {
+        } catch (NoSuchAlgorithmException | IOException | PythonExecutionException e) {
             throw new RuntimeException(e);
         }
 
-        return null;
     }
 }
