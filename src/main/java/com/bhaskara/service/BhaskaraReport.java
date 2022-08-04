@@ -5,13 +5,13 @@ import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
 public class BhaskaraReport {
-    public static String createPDF(Map<String, String> valores) throws PythonExecutionException, IOException {
+
+    public static void createPDF(Map<String, String> valores) throws PythonExecutionException, IOException {
 
         Bhaskara.setCoeficientes(valores.get("Valor A"), valores.get("Valor B"), valores.get("Valor C"));
 
@@ -19,15 +19,13 @@ public class BhaskaraReport {
 
         Map<String, String> conteudoDoPDF = Bhaskara.takePropriedades();
 
-        String MD5 = BhaskaraReport.createConteudoPDF(conteudoDoPDF);
+        BhaskaraReport.createConteudoPDF(conteudoDoPDF);
 
-        return MD5;
     }
 
-    public static String createConteudoPDF(Map <String, String> conteudo){
+    public static void createConteudoPDF(Map <String, String> conteudo){
 
         try {
-
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream("bhaskaraDescription.pdf"));
 
@@ -70,12 +68,9 @@ public class BhaskaraReport {
             document.add(grafico);
             document.close();
 
-        } catch (FileNotFoundException | DocumentException e) {
+        } catch (DocumentException | IOException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
-        return null;
     }
 }

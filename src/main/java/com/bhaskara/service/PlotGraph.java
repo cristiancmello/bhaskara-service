@@ -48,7 +48,5 @@ public class PlotGraph {
 
         plt.savefig("grafico.png");
         plt.executeSilently();
-
     }
-
 }

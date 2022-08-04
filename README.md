@@ -157,7 +157,7 @@ Scenario: dada constante 'a' sendo zero, indique "Nao existem raizes reais". Com
 * EXEMPLO 4
 
 ```gherkin
-Scenario: dada um programa que faz a leitura via linha de comando do tipo REPL, digita-se
+Scenario: dado um programa que faz a leitura via linha de comando do tipo REPL, digita-se
 comando para calcular as raizes usando Bhaskara.
 
   Given o comando 'calcbhaskara'
@@ -171,7 +171,12 @@ comando para calcular as raizes usando Bhaskara.
 * EXEMPLO 5
 
 ```gherkin
-# TODO Exemplo de Historia com o tratamento de erros de digitacao de comandos
+Scenario: dado um programa que faz a leitura via linha de comando do tipo REPL, ao digitar
+um comando desconhecido, indique "Comando desconhecido".
+
+  Given um comando desconhecido, isto é, que não está na lista de comandos criados
+  When o comando for executado
+  Then exibir a mensagem "Comando desconhecido"
 ```
 
 ### Feature F002: Uma API RESTful para facilitar uso por outros softwares
@@ -195,7 +200,7 @@ visualizar a equacao.
 
   Given os coeficientes a, b e c e conjunto de raizes
   When eu chamo o metodo para gerar o grafico da equacao 
-  Then um grafico é gerado como uma imagem PNG e inserido em um documento PDF
+  Then um grafico é gerado como uma imagem PNG.
 ```
 
 * EXEMPLO 2:
