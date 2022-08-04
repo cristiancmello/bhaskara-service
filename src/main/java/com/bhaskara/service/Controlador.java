@@ -1,6 +1,8 @@
 package com.bhaskara.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Controlador {
@@ -13,6 +15,9 @@ public class Controlador {
         switch (comando) {
             case "calcbhaskara":
                 calcBhaskara(scanner);
+                break;
+            case "mathreport":
+                mathreport(scanner);
                 break;
             default:
                 System.err.println("Comando desconhecido");
@@ -37,6 +42,25 @@ public class Controlador {
 
             String retorno = "X1: " + raizes.get(0) + " | X2: " + raizes.get(1);
             System.out.println(retorno);
+        }
+        catch (Throwable throwable)
+        {
+            System.err.println(throwable.getMessage());
+        }
+    }
+
+    private static void mathreport(Scanner scanner) {
+        final String[] COEFICIENTES = {"A", "B", "C"};
+        Map<String, String> valores = new HashMap<>();
+
+        for(int i = 0; i < 3; i++) {
+            System.out.print("Por favor, insira o valor de " + COEFICIENTES[i] + " >> ");
+            valores.put("Valor " + COEFICIENTES[i], scanner.nextLine());
+        }
+
+        try
+        {
+            BhaskaraReport.createPDF(valores);
         }
         catch (Throwable throwable)
         {

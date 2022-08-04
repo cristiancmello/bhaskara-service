@@ -1,11 +1,14 @@
 package com.bhaskara.service;
 
+import com.testautomationguru.utility.CompareMode;
+import com.testautomationguru.utility.PDFUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,6 +71,20 @@ class ControladorTest {
         Controlador.main(new String[0]);
 
         assertThat(erro.toString()).contains("Nao existem raizes reais");
+    }
+
+    @Test
+    void given_ComandoMathReport_when_ComandoExecutado_then_CriarPDFComPropriedadesDaEquacao() throws IOException {
+        String comando = "mathreport";
+        String inputA = "1", inputB = "-2", inputC = "-3";
+        setEntrada(comando, inputA, inputB, inputC);
+
+        Controlador.main(new String[0]);
+
+        PDFUtil pdfUtil = new PDFUtil();
+        pdfUtil.setCompareMode(CompareMode.VISUAL_MODE);
+
+        assertThat(pdfUtil.compare("bhaskaraDescription.pdf" , "compareDescription.pdf")).isTrue();
     }
 
     @Test
