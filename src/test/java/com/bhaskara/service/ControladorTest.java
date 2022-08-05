@@ -51,7 +51,7 @@ class ControladorTest {
         String inputA = "1", inputB = "-2", inputC = "-3";
         setEntrada(comando, inputA, inputB, inputC);
 
-        Controlador.main(new String[0]);
+        Controlador.start();
 
         assertThat(saida.toString()).contains("3.0", "-1.0");
     }
@@ -62,7 +62,7 @@ class ControladorTest {
         String inputA = "g", inputB = "-2", inputC = "-3";
         setEntrada(comando, inputA, inputB, inputC);
 
-        Controlador.main(new String[0]);
+        Controlador.start();
 
         assertThat(erro.toString()).contains("Por favor insira numeros reais!");
     }
@@ -73,7 +73,7 @@ class ControladorTest {
         String inputA = "0", inputB = "-2", inputC = "-3";
         setEntrada(comando, inputA, inputB, inputC);
 
-        Controlador.main(new String[0]);
+        Controlador.start();
 
         assertThat(erro.toString()).contains("Nao existem raizes reais");
     }
@@ -84,7 +84,7 @@ class ControladorTest {
         String inputA = "1", inputB = "-2", inputC = "-3";
         setEntrada(comando, inputA, inputB, inputC);
 
-        Controlador.main(new String[0]);
+        Controlador.start();
 
         PDFUtil pdfUtil = new PDFUtil();
         pdfUtil.setCompareMode(CompareMode.VISUAL_MODE);
@@ -98,7 +98,7 @@ class ControladorTest {
         String inputA = "1", inputB = "-2", inputC = "-3";
         setEntrada(comando, inputA, inputB, inputC);
 
-        Controlador.main(new String[0]);
+        Controlador.start();
 
         BufferedImage graficoEsperado = ImageComparisonUtil.readImageFromResources("graficoEsperado.png");
         BufferedImage grafico = ImageComparisonUtil.readImageFromResources("grafico.png");
@@ -113,7 +113,7 @@ class ControladorTest {
         String comando = "comandodesconhecido";
         setEntrada(comando);
 
-        Controlador.main(new String[0]);
+        Controlador.start();
 
         assertThat(erro.toString()).contains("Comando desconhecido");
     }

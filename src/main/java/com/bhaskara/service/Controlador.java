@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Controlador {
-    public static void main(String[] args) {
+    public static void start() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("O que deseja executar? >> ");
