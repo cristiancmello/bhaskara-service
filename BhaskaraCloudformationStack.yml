@@ -1,1 +1,7 @@
-# Cloudformation Application Stack
+AWSTemplateFormatVersion: 2010-09-09
+
+Resources:
+  ECSCluster:
+    Type: 'AWS::ECS::Cluster'
+    Properties:
+      ClusterName: BhaskaraCluster
