@@ -26,6 +26,12 @@ e a etapa de deploy. Assim garanto que a infra entregue cumpre a feature e requi
 Podemos, por exemplo, escanear portas TCP antes mesmo de fazer deploy da aplicação, evitando ataques internos
 por exposição de portas sem devido acompanhamento. Isso nos traz possibilidade de automatizar inspeções técnicas complexas após deployment.
 
+#### Teste de Infra IaC AWS
+
+```sh
+mvn test -Dtest=BhaskaraCfTests
+```
+
 ## Narrativa de Negócio
 
 O **professor de matemática Estevão** veio até a nós pelo nosso canal de contato com o cliente em busca de uma **solução de software**

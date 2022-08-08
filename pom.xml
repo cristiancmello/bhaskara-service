@@ -119,6 +119,7 @@
 				<configuration>
 					<excludes>
 						<exclude>**/BhaskaraOpsTests.java</exclude>
+						<exclude>**/BhaskaraCfTests.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
