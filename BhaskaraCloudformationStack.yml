@@ -4,4 +4,92 @@ Resources:
   ECSCluster:
     Type: 'AWS::ECS::Cluster'
     Properties:
-      ClusterName: BhaskaraCluster
+      ClusterName: BhaskaraTesteClusterLast1
+      CapacityProviders:
+        - FARGATE
+      DefaultCapacityProviderStrategy:
+        - CapacityProvider: FARGATE
+          Weight: 1
+  BhaskaraTaskDefinitionTeste:
+    Type: 'AWS::ECS::TaskDefinition'
+    Properties:
+      RequiresCompatibilities:
+        - "FARGATE"
+      ContainerDefinitions:
+          - Name: "bhaskara-service"
+            Image: "809548491512.dkr.ecr.us-east-1.amazonaws.com/bhaskara-service"
+            MemoryReservation: "256"
+            Essential: true
+            LogConfiguration:
+              LogDriver: "awslogs"
+              Options:
+                awslogs-group: "/ecs/BhaskaraTaskDefinitionTeste"
+                awslogs-region: "us-east-1"
+                awslogs-create-group: "true"
+                awslogs-stream-prefix: "ecs"
+      NetworkMode: "awsvpc"
+      Memory: "512"
+      Cpu: "256"
+      Family: "BhaskaraTaskDefinitionTeste"
+      TaskRoleArn: !Ref TaskRole
+      ExecutionRoleArn: !Ref ExecutionTaskRole
+      RuntimePlatform:
+        OperatingSystemFamily: "LINUX"
+  BhaskaraServiceTeste:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: BhaskaraTesteClusterLast1
+      DesiredCount: 1
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets:
+            - subnet-09463a8a8ff9644ec
+      PropagateTags: SERVICE
+      SchedulingStrategy: REPLICA
+      TaskDefinition: !Ref BhaskaraTaskDefinitionTeste
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "ecs-tasks.amazonaws.com"
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: '*'
+                Resource: '*'
+  ExecutionTaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "ecs-tasks.amazonaws.com"
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: '*'
+                Resource: '*'
+
+#ARN é uma propriedade computada!
+
+
+
